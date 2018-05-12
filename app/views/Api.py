@@ -34,14 +34,12 @@ def WeCheckLogin(session3rd):
     cache = getCache()
     print cache
     session3rd =request.args.get("session3rd")
-    print session3rd
-    print "AAAAAAA"
-    print cache.get(session3rd)
+
     if cache.get(session3rd):
         openid = cache.get(session3rd)[0]
-        print openid
+
         customer = Customer.query.filter_by(openid=openid).first()
-        print customer
+
         if  not customer:
 
             return False
