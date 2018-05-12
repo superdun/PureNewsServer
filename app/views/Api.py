@@ -105,7 +105,7 @@ def WeAttitude():
     else:
 
         attitude = Attitude(openid=openid,postid=postid,status=at)
-        post = Post.query.filter_by(id = postid).first()
+        post = Post.query().filter_by(id = postid).first()
         if at==1:
             post.agreecount = post.agreecount+1
         elif at==-1:

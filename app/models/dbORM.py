@@ -17,12 +17,12 @@ class Post(db.Model):
     title = db.Column(db.String(80))
     img = db.Column(db.String(200))
     detail = db.Column(db.String(5000))
-    agreecount = db.Column(db.Integer)
-    disagreecount = db.Column(db.Integer)
+    agreecount = db.Column(db.Integer,default=0)
+    disagreecount = db.Column(db.Integer,default=0)
     comment = db.Column(db.String(5000))
     tagid = db.Column(db.Integer, db.ForeignKey('tag.id'))
     customers = db.relationship('Customer', secondary="attitude", backref='Post', lazy='dynamic')
-    day = db.Column(db.Date)
+    day = db.Column(db.Date,default=date.today())
     status = db.Column(db.String(200),default="publish")
     def __repr__(self):
         return self.title
