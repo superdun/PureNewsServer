@@ -23,13 +23,14 @@ class Post(db.Model):
     tagid = db.Column(db.Integer, db.ForeignKey('tag.id'))
     customers = db.relationship('Customer', secondary="attitude", backref='Post', lazy='dynamic')
     day = db.Column(db.Date)
+    status = db.Column(db.String(200),default="publish")
     def __repr__(self):
         return self.title
 
     @classmethod
     def query(cls):
         original_query = db.session.query(cls)
-        return original_query.filter_by(day=date.today())
+        return original_query.filter_by(day=date.today(),status="publish")
 
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)

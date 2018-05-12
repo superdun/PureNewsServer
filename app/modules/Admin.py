@@ -114,9 +114,11 @@ class AttitudeView(AdminModel):
 
 
 class PostView(AdminModel):
+
     @property
     def form_extra_fields(self):
         return {
             'img': ImageUpload(u'图片', base_path=getUploadUrl(), relative_path=thumb.relativePath(),
                                url_relative_path=getQiniuDomain()),
+            'status': SelectField(u'状态', choices=(("delete", u"已删除"), ("publish", u"发布")))
         }
