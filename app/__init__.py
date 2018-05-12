@@ -80,8 +80,8 @@ def create_app():
     app.register_blueprint(Api.api, url_prefix='/api')
     app.register_blueprint(Login.login_bp, url_prefix='')
     app.register_blueprint(Web.web, url_prefix='')
-    manager = flask_restless.APIManager(app,flask_sqlalchemy_db=db, exclude_columns=['customers','status'])
-    manager.create_api(Post, methods=['GET'])
+    manager = flask_restless.APIManager(app,flask_sqlalchemy_db=db)
+    manager.create_api(Post, methods=['GET'], exclude_columns=['customers','status'])
     # 附加路由和自定义的错误页面
     with app.app_context():
         from modules.Admin import dashboard
