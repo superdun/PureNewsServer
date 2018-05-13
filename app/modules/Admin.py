@@ -114,14 +114,13 @@ class AttitudeView(AdminModel):
 
 
 class PostView(AdminModel):
-    pass
-    # form_excluded_columns = ('customers','Aagreecount','disagreecount')
-    # column_labels = dict(created_at=u'创建时间', day=u'发布日期', title=u'标题', detail=u'详情'
-    #                      , comment=u'编辑评论', Customer=u'点赞用户', Tag=u"标签",img=u"图片", mendhistories=u'维修历史')
-    # @property
-    # def form_extra_fields(self):
-    #     return {
-    #         'img': ImageUpload(u'图片', base_path=getUploadUrl(), relative_path=thumb.relativePath(),
-    #                            url_relative_path=getQiniuDomain()),
-    #         'status': SelectField(u'状态', choices=(("delete", u"已删除"), ("publish", u"发布"),))
-    #     }
+    form_excluded_columns = ('customers','Aagreecount','disagreecount')
+    column_labels = dict(created_at=u'创建时间', day=u'发布日期', title=u'标题', detail=u'详情'
+                         , comment=u'编辑评论', Customer=u'点赞用户', Tag=u"标签",img=u"图片", mendhistories=u'维修历史')
+    @property
+    def form_extra_fields(self):
+        return {
+            'img': ImageUpload(u'图片', base_path=getUploadUrl(), relative_path=thumb.relativePath(),
+                               url_relative_path=getQiniuDomain()),
+            'status': SelectField(u'状态', choices=(("delete", u"已删除"), ("publish", u"发布"),))
+        }
