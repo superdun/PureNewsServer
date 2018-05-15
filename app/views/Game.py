@@ -9,11 +9,11 @@ game = Blueprint('game', __name__)
 @game.route('/thanos')
 def Thanos():
     if 'status' in request.cookies:
-        status = request.cookies.get('status')
+        status = int(request.cookies.get('status'))
     else:
         status = random.randint(0, 1)
     if 'count' in request.cookies:
-        count = request.cookies.get('count')
+        count = int(request.cookies.get('count'))
     else:
         count = 0
     count = 1 + count
@@ -28,6 +28,6 @@ def Thanos():
         else:
             resp = make_response(render_template("game/thanos.html",msg=u"怎么，活着不开心，非要皮%d下？"%(count-2)))
 
-    resp.set_cookie('status', status)
-    resp.set_cookie('count', count)
+    resp.set_cookie('status', str(status))
+    resp.set_cookie('count', str(count))
     return resp
