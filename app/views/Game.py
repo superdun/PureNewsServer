@@ -21,7 +21,7 @@ def Thanos():
         if count<3:
             resp = make_response(render_template("game/thanos.html",msg=u"很不幸，你被灭霸干掉了"))
         else:
-            resp = make_response(render_template("game/thanos.html",msg=u"不要做无谓的努力了，你的死是为了更好的未来"))
+            resp = make_response(render_template("game/thanos.html",msg=u"不要做无谓的努力了，这是为了更好的宇宙"))
     else:
         if count < 3:
             resp = make_response(render_template("game/thanos.html",msg=u"你从灭霸的手中侥幸逃脱了，可以看到明天的朝阳"))
