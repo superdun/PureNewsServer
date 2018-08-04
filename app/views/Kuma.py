@@ -42,7 +42,7 @@ def my_hook(d):
     return [filename,imgname]
 @kuma.route('/fetch')
 def KumaFetchApi():
-    my_proxies = {"http": "http://127.0.0.1:1080", "https": "https://127.0.0.1:1080"}
+    my_proxies = current_app.config.get("PROXY")
     r = requests.get(
         "https://content.googleapis.com/youtube/v3/playlistItems?playlistId=PL2nNLUYH9TlTTR3BHGO62PaJ8lkP9QnjJ&maxResults=50&part=snippet%2CcontentDetails&key=AIzaSyA1l98H4DYII8Y8P5yWHX6KimsrVoO7q3Q",
         proxies=my_proxies)
