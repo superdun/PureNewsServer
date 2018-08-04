@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block css %}
+<title>リラックマ</title>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        {% for k in kumas %}
+            <a href="{{ url_for('kuma.KumaVideoWeb',id=k.id) }}">
+                <div class="col s12 m4" >
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ url_for('static',filename="video/"+k.img) }}">
+                        </div>
+                        <div class="card-content">
+                            <p>{{ k.title }}</p>
+                            <p>{{ k.created_at }}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+
+        {% endfor %}
+    </div>
+
+{% endblock %}
+{% block script %}
+
+{% endblock %}
+{#<video autoplay>#}
+{#    <source src="{{ url_for('static',filename='video/6-r4QcdJVxM.mp4') }}" type="video/mp4">#}
+{#    Your browser does not support the video tag.#}
+{#</video>#}

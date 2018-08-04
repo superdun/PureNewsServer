@@ -75,12 +75,13 @@ def create_app():
         return user
 
     # 注册蓝本
-    from views import Login,Api,Web,Game
+    from views import Login,Api,Web,Game,Kuma
     from models.dbORM import Post
     app.register_blueprint(Api.api, url_prefix='/api')
     app.register_blueprint(Login.login_bp, url_prefix='')
     app.register_blueprint(Web.web, url_prefix='')
     app.register_blueprint(Game.game, url_prefix='/game')
+    app.register_blueprint(Kuma.kuma, url_prefix='/kuma')
     manager = flask_restless.APIManager(app,flask_sqlalchemy_db=db)
     manager.create_api(Post, methods=['GET'], exclude_columns=['customers','status'])
     # 附加路由和自定义的错误页面

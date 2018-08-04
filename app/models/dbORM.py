@@ -3,7 +3,15 @@ from datetime import datetime
 from app import db
 from datetime import date
 
-
+class Kuma_kuma(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, default=datetime.now())
+    title = db.Column(db.Integer, db.ForeignKey('customer.openid'))
+    status = db.Column(db.String(80))
+    img = db.Column(db.String(200))
+    url = db.Column(db.String(200))
+    def __repr__(self):
+        return self.title
 class Attitude(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     postid = db.Column(db.Integer, db.ForeignKey('post.id'))

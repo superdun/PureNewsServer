@@ -2,3 +2,4 @@
 *.pyc
 instance/*
 keys/*
+app/static/video
