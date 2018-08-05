@@ -57,7 +57,7 @@ def KumaFetchApi():
             hasKuma = Kuma_kuma.query.filter_by(title=title).first()
             if not hasKuma:
                 ydl_opts = {"progress_hooks":[my_hook],"writethumbnail":current_app.config.get("FILE_FOLDER") + i["snippet"]["resourceId"]["videoId"]+".jpg"
-                ,'format': 'best', "proxy": "http://127.0.0.1:1080",
+                ,'format': 'best', "proxy": current_app.config.get("YTD_PROXY"),
                             "outtmpl": current_app.config.get("FILE_FOLDER") + "%(id)s.%(ext)s"}
                 with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                     ydl.download([url])
