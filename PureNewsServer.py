@@ -14,4 +14,4 @@ application = create_app()
 
 if __name__ == '__main__':
     # manager.run()
-    application.run()
+    application.run(port=8080)
