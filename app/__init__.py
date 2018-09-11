@@ -76,7 +76,7 @@ def create_app():
 
     # 注册蓝本
     from views import Login,Api,Web,Game,Kuma
-    from models.dbORM import Post
+    from models.dbORM import Post,Liuzi
     app.register_blueprint(Api.api, url_prefix='/api')
     app.register_blueprint(Login.login_bp, url_prefix='')
     app.register_blueprint(Web.web, url_prefix='')
@@ -84,6 +84,7 @@ def create_app():
     app.register_blueprint(Kuma.kuma, url_prefix='/kuma')
     manager = flask_restless.APIManager(app,flask_sqlalchemy_db=db)
     manager.create_api(Post, methods=['GET'], exclude_columns=['customers','status'])
+    manager.create_api(Liuzi, methods=['GET','POST'], exclude_columns=['img'],results_per_page=None)
     # 附加路由和自定义的错误页面
     with app.app_context():
         from modules.Admin import dashboard

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>刘子の幸福研途</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!--Import Google Icon Font-->
+    <link href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link href="https://cdn.bootcss.com/materialize/0.100.2/css/materialize.min.css" rel="stylesheet">
+    {#    <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">#}
+    <style type="text/css">
+        #c1 {
+            text-align: center;
+            padding-top: 15px;
+        }
+    </style>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<div class="row">
+    <div class="input-field col s8">
+        <input id="detail" type="text" class="validate">
+        <label for="detail">刘子</label>
+    </div>
+    <div class="col s4" id="c1">
+        <a class="waves-effect waves-light btn" id="submit">提交</a>
+    </div>
+</div>
+<table class="striped">
+    <thead>
+    <tr>
+        <th data-field="id" id="date">日♂期</th>
+        <th data-field="name">详情</th>
+    </tr>
+    </thead>
+
+    <tbody id="tbb">
+
+
+    </tbody>
+</table>
+
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+
+<script src="https://cdn.bootcss.com/materialize/0.100.2/js/materialize.min.js"></script>
+<script>
+    function getData(order_by) {
+
+        $.ajax({
+            url: '/api/liuzi',
+            dataType: "json",
+            contentType: "application/json",
+            async: false,
+            data: {"q": JSON.stringify({"order_by": order_by})},
+            success: function (data) {
+                if (data["num_results"]) {
+                    $("tr").remove(".tbr");
+                    for (var i = 0; i < data["num_results"]; i++) {
+                        var datas = data["objects"][i];
+                        $("#tbb").append("<tr class=\"tbr\"> <td>" + datas["created_at"] + "</td> <td>" + datas["detail"] + "</td>  </tr>")
+                    }
+
+                }
+                else {
+
+                }
+
+            }
+
+        })
+    }
+    function getNow() {
+        var date = new Date();
+        var seperator1 = "-";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        return date.getFullYear() + seperator1 + month + seperator1 + strDate;
+    }
+    function setData(detail) {
+        var postbody = {
+            "created_at": getNow(),
+            "detail": detail
+        };
+        $.ajax({
+            url: '/api/liuzi',
+            type: 'POST',
+            dataType: "json",
+            data: JSON.stringify(postbody),
+            contentType: "application/json; charset=utf-8",
+            processData: false,
+            async: false,
+            success: function (data) {
+                getData({"field": "id", "direction": "desc"});
+                alert("记录刘子研究生生活の点点滴滴");
+            }
+
+        })
+    }
+    $(document).ready(function () {
+        var order = "desc";
+        getData([{"field": "id", "direction": order}]);
+        $("#submit").click(function () {
+            if (!$("#detail").val()) {
+                alert("刘子今天干了啥？");
+                return;
+            }
+            setData($("#detail").val());
+        });
+        $("#date").click(function () {
+            if (order === "desc") {
+                order = "asc";
+
+            }
+            else {
+                order = "desc";
+            }
+            getData([{"field": "id", "direction": order}]);
+        })
+    })
+</script>
+</html>
