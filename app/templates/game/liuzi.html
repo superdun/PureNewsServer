@@ -61,7 +61,7 @@
                     $("tr").remove(".tbr");
                     for (var i = 0; i < data["num_results"]; i++) {
                         var datas = data["objects"][i];
-                        $("#tbb").append("<tr class=\"tbr\"> <td>" + datas["created_at"] + "</td> <td>" + datas["detail"] + "</td>  </tr>")
+                        $("#tbb").append("<tr class=\"tbr\"> <td>" + datas["created_at"].split("T")[0] + "</td> <td>" + datas["detail"] + "</td>  </tr>")
                     }
 
                 }
