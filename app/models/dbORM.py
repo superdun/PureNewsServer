@@ -18,6 +18,25 @@ class Kuma_kuma(db.Model):
     url = db.Column(db.String(200))
     def __repr__(self):
         return self.title
+class Jyzhd(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, default=datetime.now())
+    cookie = db.Column(db.String(80))
+    status = db.Column(db.String(80))
+    content = db.Column(db.String(2000))
+    replies = db.relationship('Jyzhd_re', backref='Jyzhd', lazy='dynamic')
+
+    def __repr__(self):
+        return self.id
+class Jyzhd_re(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, default=datetime.now())
+    cookie = db.Column(db.String(80))
+    status = db.Column(db.String(80))
+    content = db.Column(db.String(2000))
+    ownerid = db.Column(db.Integer, db.ForeignKey('jyzhd.id'))
+    def __repr__(self):
+        return self.id
 class Attitude(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     postid = db.Column(db.Integer, db.ForeignKey('post.id'))
