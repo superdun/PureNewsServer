@@ -4,7 +4,7 @@ import random
 from  flask import Blueprint, request, render_template, make_response, jsonify, current_app, abort
 from pyDes import *
 from app import db
-
+import base64
 from ..models.dbORM import Jyzhd, Jyzhd_re
 from ..modules.DES import encrypt_str, decrypt_str
 import datetime, time, random
@@ -53,8 +53,8 @@ def JY():
         username = "JY@" + str(random.randint(0, 10000)) + str(time.time())
         value = str(count) + "@" + str(random.randint(0, 10000)) + str(time.time())
         resp = make_response(render_template("JY/JY.html", count=count))
-        resp.set_cookie("JYV", encrypt_str(Des_Key, Des_IV, value),expires=60 * 60 * 24 * 9000)
-        resp.set_cookie("JYU", encrypt_str(Des_Key, Des_IV, username),expires=60 * 60 * 24 * 9000)
+        resp.set_cookie("JYV", encrypt_str(Des_Key, Des_IV, value))
+        resp.set_cookie("JYU", encrypt_str(Des_Key, Des_IV, username))
         return resp
     if CheckCookie()[0]:
         jys = Jyzhd.query.filter_by(cookie=CheckCookie()[2]).all()
@@ -78,7 +78,7 @@ def apiJYs():
                     db.session.commit()
                     EnvelopCount = GetEnvelopCount(-1)
                     resp = make_response(jsonify({"status": "ok", "count": EnvelopCount[1]}))
-                    resp.set_cookie("JYV", EnvelopCount[0],expires=60 * 60 * 24 * 9000)
+                    resp.set_cookie("JYV", EnvelopCount[0])
                     return resp
                 else:
                     return jsonify({"status": "noCount"})
@@ -110,7 +110,7 @@ def setJYRs():
                 db.session.commit()
                 EnvelopCount = GetEnvelopCount(1)
                 resp = make_response(jsonify({"status": "ok", "count": EnvelopCount[1]}))
-                resp.set_cookie("JYV", EnvelopCount[0],expires=60 * 60 * 24 * 9000)
+                resp.set_cookie("JYV", EnvelopCount[0])
                 return resp
             else:
                 return abort(404)
