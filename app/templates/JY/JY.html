@@ -72,7 +72,7 @@
                     {% for JY in JYS %}
                     <li>
                         <div class="collapsible-header ">
-                            {{JY.created_at}} {{ JY.content[0:3] }}
+                            {{JY.created_at}} {{ JY.content[0:5] }}....
                             {% if JY.status=="replied" %}
                             <span class="badge red white-text">
                                 被回复
@@ -102,7 +102,7 @@
                     {% for JYR in JYRS %}
                     <li>
                         <div class="collapsible-header ">
-                            {{JYR.Jyzhd.created_at}} {{ JYR.Jyzhd.content[0:3] }}
+                            {{JYR.Jyzhd.created_at}} {{ JYR.Jyzhd.content[0:5] }}....
                             {% if JYR.Jyzhd.replies.count()>=2 %}
                             <span class="badge red white-text">
                                 被回复
