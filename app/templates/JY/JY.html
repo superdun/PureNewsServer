@@ -87,7 +87,7 @@
                             <p>
                                 {{JYR.created_at}} {{ JYR.content }}
                             </p>
-                            {% endfor %} {% if JY.replies.count()>=1 %}
+                            {% endfor %} {% if JY.replies.count()==1 %}
                             <input hidden id="JYR_id" value="{{ JY.id }}">
                             <a class="waves-effect waves-light btn green" href="#modal2" id="replyRR">
                                 回复TA
@@ -103,7 +103,7 @@
                     <li>
                         <div class="collapsible-header ">
                             {{JYR.Jyzhd.created_at}} {{ JYR.Jyzhd.content[0:5] }}....
-                            {% if JYR.Jyzhd.replies.count()>=2 %}
+                            {% if JYR.Jyzhd.replies.count()==2 %}
                             <span class="badge red white-text">
                                 被回复
                             </span>
