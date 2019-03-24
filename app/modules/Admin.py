@@ -38,10 +38,8 @@ def img_url_format(value):
 def dashboard():
     admin = Admin(current_app, name=u'PureNews后台管理')
     admin.add_view(UserView(User, db.session, name=u"管理员管理"))
-    admin.add_view(TagView(Tag, db.session, name=u"标签"))
     admin.add_view(CustomerView(Customer, db.session, name=u"用户"))
-    admin.add_view(PostView(Post, db.session, name=u"文章"))
-    admin.add_view(AttitudeView(Attitude, db.session, name=u"点赞"))
+
 
 class UploadWidget(form.ImageUploadInput):
     def get_url(self, field):
@@ -97,8 +95,6 @@ class UserView(AdminModel):
         model.password = md5.hexdigest()
 
 
-class TagView(AdminModel):
-    pass
 
 
 class CustomerView(AdminModel):
@@ -108,19 +104,7 @@ class CustomerView(AdminModel):
 
     }
 
-class AttitudeView(AdminModel):
-    pass
 
 
 
-class PostView(AdminModel):
-    form_excluded_columns = ('customers','agreecount','disagreecount')
-    column_labels = dict(created_at=u'创建时间', day=u'发布日期', title=u'标题', detail=u'详情'
-    ,agreecount=u'点赞数',disagreecount=u'反对数', comment=u'编辑评论', Customer=u'点赞用户', Tag=u"标签",img=u"图片", mendhistories=u'维修历史')
-    @property
-    def form_extra_fields(self):
-        return {
-            'img': ImageUpload(u'图片', base_path=getUploadUrl(), relative_path=thumb.relativePath(),
-                               url_relative_path=getQiniuDomain()),
-            'status': SelectField(u'状态', choices=(("delete", u"已删除"), ("publish", u"发布"),))
-        }
+

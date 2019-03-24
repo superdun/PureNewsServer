@@ -21,3 +21,10 @@ VERIFYIDCODEURL = "http://aliyunverifyidcard.haoservice.com/idcard/VerifyIdcardv
 VERIFYIDCODE_APPCODE = "422c011beb6f4b1b96a8de7c3330b464"
 
 FBTIME_RANGE = 100
+
+
+FUTURE_WEATHER_URL ="https://api.heweather.net/s6/weather/forecast"
+NOW_WEATHER_URL ="https://api.heweather.net/s6/weather/now"
+NOW_AIR_URL ="https://api.heweather.net/s6/air/now"
+HISTORY_WEATHER_URL ="https://api.heweather.net/s6/weather/historical"
+

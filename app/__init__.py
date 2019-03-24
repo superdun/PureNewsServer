@@ -22,66 +22,66 @@ def create_app():
 
 
 
-    # login_manager.init_app(app)
-    #
-    # from  models.dbORM import User as U
-    # def getusers():
-    #     users = {}
-    #     raw_users = U.query.all()
-    #
-    #     for user in raw_users:
-    #         users[user.name] = {'password': user.password, 'username': user.name,
-    #                             'id': user.id}
-    #     return users
-    #
-    # class User(flask_login.UserMixin):
-    #     pass
-    # @login_manager.unauthorized_handler
-    # def unauthorized_handler():
-    #     return render_template("login.html")
-    #
-    # @login_manager.user_loader
-    # def user_loader(username):
-    #     users = getusers()
-    #     if username not in users:
-    #         return
-    #
-    #     user = User()
-    #     user.name = username
-    #     user.id = users[username]['id']
-    #     return user
-    #
-    # @login_manager.request_loader
-    # def request_loader(request):
-    #     users = getusers()
-    #
-    #     username = request.form.get('username')
-    #     password = request.form.get('password')
-    #     if password == "":
-    #         return
-    #     if username not in users:
-    #         return
-    #
-    #     user = User()
-    #     user.name = username
-    #     user.id = users[username]['id']
-    #     db.session.commit()
-    #     # DO NOT ever store passwords in plaintext and always compare password
-    #     # hashes using constant-time comparison!
-    #
-    #     user.is_authenticated = request.form[
-    #                                 'password'] == users[username]['password']
-    #
-    #     return user
+    login_manager.init_app(app)
+
+    from  models.dbORM import User as U
+    def getusers():
+        users = {}
+        raw_users = U.query.all()
+
+        for user in raw_users:
+            users[user.name] = {'password': user.password, 'username': user.name,
+                                'id': user.id}
+        return users
+
+    class User(flask_login.UserMixin):
+        pass
+    @login_manager.unauthorized_handler
+    def unauthorized_handler():
+        return render_template("login.html")
+
+    @login_manager.user_loader
+    def user_loader(username):
+        users = getusers()
+        if username not in users:
+            return
+
+        user = User()
+        user.name = username
+        user.id = users[username]['id']
+        return user
+
+    @login_manager.request_loader
+    def request_loader(request):
+        users = getusers()
+
+        username = request.form.get('username')
+        password = request.form.get('password')
+        if password == "":
+            return
+        if username not in users:
+            return
+
+        user = User()
+        user.name = username
+        user.id = users[username]['id']
+        db.session.commit()
+        # DO NOT ever store passwords in plaintext and always compare password
+        # hashes using constant-time comparison!
+
+        user.is_authenticated = request.form[
+                                    'password'] == users[username]['password']
+
+        return user
 
     # 注册蓝本
-    from views import Web,Game
+    from views import Api
     # from models.dbORM import Post,Liuzi,Jyzhd
-    from models.dbORM import Jyzhd
-    # app.register_blueprint(Api.api, url_prefix='/api')
+    #rom models.dbORM import Jyzhd
+    app.register_blueprint(Api.api, url_prefix='/api')
     # app.register_blueprint(Login.login_bp, url_prefix='')
-    app.register_blueprint(Web.web, url_prefix='')
-    app.register_blueprint(Game.game, url_prefix='/game')
+    #app.register_blueprint(Web.web, url_prefix='')
+    #app.register_blueprint(Game.game, url_prefix='/game')
     # app.register_blueprint(Kuma.kuma, url_prefix='/kuma')
     # manager = flask_restless.APIManager(app,flask_sqlalchemy_db=db)
     # manager.create_api(Post, methods=['GET'], exclude_columns=['customers','status'])
