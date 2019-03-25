@@ -185,7 +185,7 @@ def WeInfo():
         'total_peopleCount': total_peopleCount,
         'peopleNearbyCount': peopleNearbyCount,
         'dayCount': dayCount,
-        'markers': markers,
+        'raw_markers': markers,
         'status': status,
         'total_count': total_count,
         'total_dayCount': total_dayCount,
