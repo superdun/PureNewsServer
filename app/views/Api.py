@@ -60,7 +60,7 @@ def WeGetUserInfo():
         customer.name = userInfo["nickName"]
         db.session.add(customer)
         db.session.commit()
-    return jsonify({"status": "ok"})
+    return jsonify({"status": "ok","userInfo":{"nickName":userInfo["nickName"], "avatarUrl":userInfo["avatarUrl"]}})
 
 @api.route("/feedback")
 def WeFeedback():
@@ -117,12 +117,18 @@ def WeStatus():
             customer.count = customer.count+currentFlu.daydelta
         else:
             customer.count = currentFlu.daydelta
+        customer.status = 0
         db.session.add(currentFlu)
         db.session.add(customer)
         db.session.commit()
     else:
        flu = Flu(start_at = datetime.now(),status=1,openid=openid,daydelta=0,
                  loc=loc,lat=lat,lon=lon)
+       customer.loc = loc
+       customer.status = 1
+       customer.lat = lat
+       customer.lon = lon
+       db.session.add(customer)
        db.session.add(flu)
        db.session.commit()
     return jsonify({"status": "ok",'stat':status})
@@ -161,10 +167,10 @@ def WeInfo():
     else:
         status = 0
         dayCount = 0
-    totalFlus = db.session.query(Flu.lat,Flu.lon).filter(Flu.status==1).all()
-    total_peopleCount = len(totalFlus)
+    totalIllPeople = Customer.query.filter_by(status=1)
+    total_peopleCount = totalIllPeople.count()
     if loc:
-        peopleNearbyCount = db.session.query(Flu.lat,Flu.lon).filter(Flu.status==1).filter_by(loc=loc).count()
+        peopleNearbyCount = totalIllPeople.filter_by(loc=loc).count()
     else:
         peopleNearbyCount = 0
 
@@ -179,13 +185,13 @@ def WeInfo():
     list = flus
     greaterCount = Customer.query.filter(Customer.count>=total_count).count()
     allCount  = Customer.query.count()
-    defeat = greaterCount/allCount
-    markers = totalFlus
+    defeat = int(greaterCount/allCount)*100
+    markers = [{"latitude":p.lat,"longitude":p.lon,"iconPath":p.img,"id":p.id,"name":"","width":30,"height":30}  for p in totalIllPeople.all()]
     info = {
         'total_peopleCount': total_peopleCount,
         'peopleNearbyCount': peopleNearbyCount,
         'dayCount': dayCount,
-        'raw_markers': markers,
+        'markers': markers,
         'status': status,
         'total_count': total_count,
         'total_dayCount': total_dayCount,

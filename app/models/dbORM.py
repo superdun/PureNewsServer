@@ -12,6 +12,10 @@ class Customer(db.Model):
     feedbacks = db.relationship('Feedback', backref='Customer', lazy='dynamic')
     flus = db.relationship('Flu', backref='Customer', lazy='dynamic')
     count = db.Column(db.Integer)
+    loc = db.Column(db.String(120))
+    lat = db.Column(db.Float)
+    lon = db.Column(db.Float)
+    status = db.Column(db.Integer)
     def __repr__(self):
         return self.id
 
