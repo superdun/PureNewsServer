@@ -184,7 +184,7 @@ def WeInfo():
         averageCount = 0
     list = flus
     greaterCount = Customer.query.filter(Customer.count>=total_count).count()-1
-    allCount  = Customer.query.count()
+    allCount  = Customer.query.count()-1
     defeat = int(greaterCount*10000.0/allCount)/100
     markers = [{"latitude":p.lat,"longitude":p.lon,"iconPath":p.img,"id":p.id,"name":"","width":30,"height":30}  for p in totalIllPeople.all()]
     info = {
