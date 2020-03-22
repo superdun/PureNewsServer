@@ -4,16 +4,17 @@
 {% endblock %}
 {% block content %}
 <div style="height: 100%;width: 100%;background-color: {{ color.color }};color: {{ color.fontcolor }};
-padding-top: 60px;padding-left: 10px;padding-right: 10px;text-align: center">
+padding-top: 60px;padding-left: 10px;padding-right: 10px;">
     <div style="width: 100%;text-align: left">
         <h2>{{ color.id[0:2] }}月{{ color.id[-2:] }}日</h2>
         <h4>{{ color.cname }}</h4>
         <h5>特征：{{ color.cprop1 }}</h5>
         <h5>花语：{{ color.cprop2 }}</h5>
     </div>
-    <a href="{{ url_for('web.birthcolorList') }}" style="color: black;bottom: 15px;position: absolute">回首页</a>
-</div>
 
+</div>
+<div style="width: 100%;bottom: 15px;position: absolute;text-align: center"><a href="{{ url_for('web.birthcolorList') }}" style="color: black;"><p>回首页</p></a>
+</div>
 {% endblock %}
 {% block script %}
 <script>
