@@ -3,7 +3,24 @@
 <title>生日色彩</title>
 {% endblock %}
 {% block content %}
-
+<a href="http://birthday-color.cafein.jp/">
+<div class="card teal lighten-4">
+	<div class="card-content black-text">
+		<p>
+			创意&数据来源于
+		</p>
+		<p>
+			http://birthday-color.cafein.jp/
+		</p>
+		<p>
+			点击访问原网站
+		</p>
+		<p>
+			汉化目前为机翻，逐渐完善中
+		</p>
+	</div>
+</div>
+</a>
     <div class="row">
         {% for c in colors %}
             <a href="{{ url_for('web.birthcolor',id=c.id) }}">
