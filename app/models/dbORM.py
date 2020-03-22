@@ -2,6 +2,20 @@
 from datetime import datetime
 from app import db
 from datetime import date
+class Color(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    color= db.Column(db.String(1000))
+    jname1= db.Column(db.String(1000))
+    jname2= db.Column(db.String(1000))
+    cname= db.Column(db.String(1000))
+    jprop1 = db.Column(db.String(1000))
+    jprop2= db.Column(db.String(1000))
+    cprop1= db.Column(db.String(1000))
+    cprop2= db.Column(db.String(1000))
+    fontcolor = db.Column(db.String(1000))
+    def __repr__(self):
+        return self.id
+
 class Customer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=datetime.now())

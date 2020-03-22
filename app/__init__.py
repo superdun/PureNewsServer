@@ -6,6 +6,7 @@ import flask_login
 import flask_restless
 import datetime
 
+
 db = SQLAlchemy()
 admin = Admin()
 login_manager = flask_login.LoginManager()
@@ -75,12 +76,13 @@ def create_app():
         return user
 
     # 注册蓝本
-    from views import Api
+    from views import Api,Web
+
     # from models.dbORM import Post,Liuzi,Jyzhd
     #rom models.dbORM import Jyzhd
     app.register_blueprint(Api.api, url_prefix='/api')
     # app.register_blueprint(Login.login_bp, url_prefix='')
-    #app.register_blueprint(Web.web, url_prefix='')
+    app.register_blueprint(Web.web, url_prefix='')
     #app.register_blueprint(Game.game, url_prefix='/game')
     # app.register_blueprint(Kuma.kuma, url_prefix='/kuma')
     # manager = flask_restless.APIManager(app,flask_sqlalchemy_db=db)
