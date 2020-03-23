@@ -1,5 +1,5 @@
 # coding=utf-8
-from flask import Flask,render_template,request
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 import flask_login
@@ -17,15 +17,13 @@ def create_app():
     app.config.from_object('config')
     app.config.from_pyfile('localConfig.py')
 
-
     db.init_app(app)
     db.app = app
 
-
-
     login_manager.init_app(app)
 
-    from  models.dbORM import User as U
+    from models.dbORM import User as U
+
     def getusers():
         users = {}
         raw_users = U.query.all()
@@ -37,6 +35,7 @@ def create_app():
 
     class User(flask_login.UserMixin):
         pass
+
     @login_manager.unauthorized_handler
     def unauthorized_handler():
         return render_template("login.html")
@@ -71,15 +70,15 @@ def create_app():
         # hashes using constant-time comparison!
 
         user.is_authenticated = request.form[
-                                    'password'] == users[username]['password']
+            'password'] == users[username]['password']
 
         return user
 
     # 注册蓝本
-    from views import Api,Web
+    from views import Api, Web
 
     # from models.dbORM import Post,Liuzi,Jyzhd
-    #rom models.dbORM import Jyzhd
+    # rom models.dbORM import Jyzhd
     app.register_blueprint(Api.api, url_prefix='/api')
     # app.register_blueprint(Login.login_bp, url_prefix='')
     app.register_blueprint(Web.web, url_prefix='')
@@ -94,6 +93,4 @@ def create_app():
         from modules.Admin import dashboard
 
         dashboard()
-
-
     return app

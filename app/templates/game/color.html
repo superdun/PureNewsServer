@@ -12,16 +12,37 @@ padding-top: 60px;padding-left: 10px;padding-right: 10px;">
         <h5>花语：{{ color.cprop2 }}</h5>
     </div>
 
+    <!-- Modal Trigger -->
 </div>
-<div style="width: 100%;bottom: 15px;position: absolute;text-align: center"><a href="{{ url_for('web.birthcolorList') }}" style="color: black;"><p>回首页</p></a>
+<div style="width: 100%;bottom: 15px;position: absolute;text-align: center">
+    <a href="#modal1" style="color: black;" class="modal-trigger">
+        <p>查看原文</p>
+    </a>
+    <a href="http://birthday-color.cafein.jp/html/{{ color.id }}.html" style="color: black;">
+        <p>访问原网站</p>
+    </a>
+    <a href="{{ url_for('web.birthcolorList') }}" style="color: black;">
+        <p>回首页</p>
+    </a>
+
 </div>
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>日文原文</h4>
+      <p>{{ color.jname1 }}</p>
+      <p>{{ color.jname2 }}</p>
+      <p>特徴：{{ color.jprop1 }}</p>
+      <p>色言葉：{{ color.jprop2 }}</p>
+    </div>
+  </div>
 {% endblock %}
 {% block script %}
 <script>
-    window.onload = function() {
-      $("html").css("height","100%");
-      $("body").css("height","100%");
+    window.onload = function () {
+        $("html").css("height", "100%");
+        $("body").css("height", "100%");
+        $('.modal').modal();
     }
 </script>
 {% endblock %}
-
