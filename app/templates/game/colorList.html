@@ -33,7 +33,7 @@
           {% else %}
           <div class="card-content black-text">
             {%  endif %}
-            <span class="card-title">{{ c.id[0:2] }}月{{ c.id[-2:] }}日</span>
+            <span class="card-title">{{ c.id|noZeroBefore }}</span>
             <p>{{ c.cprop1 }}</p>
             <p>{{ c.cprop2 }}</p>
           </div>

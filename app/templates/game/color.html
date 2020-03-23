@@ -6,7 +6,7 @@
 <div style="height: 100%;width: 100%;background-color: {{ color.color }};color: {{ color.fontcolor }};
 padding-top: 60px;padding-left: 10px;padding-right: 10px;">
     <div style="width: 100%;text-align: left">
-        <h2>{{ color.id[0:2] }}月{{ color.id[-2:] }}日</h2>
+        <h2>{{ color.id|noZeroBefore }}</h2>
         <h4>{{ color.cname }}</h4>
         <h5>特征：{{ color.cprop1 }}</h5>
         <h5>花语：{{ color.cprop2 }}</h5>

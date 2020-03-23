@@ -23,6 +23,11 @@ def create_app():
     login_manager.init_app(app)
 
     from models.dbORM import User as U
+    @app.template_filter('noZeroBefore')
+    def noZeroBefore(s):
+        m = int(s[0:2])
+        d = int(s[-2:])
+        return u"%d月%d日" % (m, d)
 
     def getusers():
         users = {}
