@@ -16,13 +16,13 @@ padding-top: 60px;padding-left: 10px;padding-right: 10px;">
 </div>
 <div style="width: 100%;bottom: 15px;position: absolute;text-align: center">
     <a href="#modal1" style="color: black;" class="modal-trigger">
-        <p>查看原文</p>
+        <p style="color: {{ color.fontcolor }}">查看原文</p>
     </a>
     <a href="http://birthday-color.cafein.jp/html/{{ color.id }}.html" style="color: black;">
-        <p>访问原网站</p>
+        <p style="color: {{ color.fontcolor }}">访问原网站</p>
     </a>
     <a href="{{ url_for('web.birthcolorList') }}" style="color: black;">
-        <p>回首页</p>
+        <p style="color: {{ color.fontcolor }}">回首页</p>
     </a>
 
 </div>
