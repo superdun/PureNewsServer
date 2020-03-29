@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block css %}
+<title>生日色彩</title>
+{% endblock %}
+{% block content %}
+<a href="https://www.nasa.gov/content/goddard/what-did-hubble-see-on-your-birthday">
+  <div class="card teal lighten-4" style="margin-top: 0;padding: 5px">
+    <div class="card-content black-text" style="padding: 12px">
+      <p>
+        哈勃望远镜在你生日当天拍摄了什么？创意&数据来源于
+      </p>
+      <p>
+        https://www.nasa.gov/content/goddard/what-did-hubble-see-on-your-birthday
+      </p>
+      <p>
+        点击访问原网站
+      </p>
+    </div>
+  </div>
+</a>
+<div class="row" style="margin-top: 40px">
+    <div class="col s1 m4 l4"></div>
+    <div class="col s10 m4 l4 " style="text-align: center">
+        <div class="input-field ">
+          <input id="date" type="number" class="validate">
+          <label for="date">输入日期</label>
+          <span class="helper-text" data-error="wrong" data-success="right">如：0614</span>
+        </div>
+        <div style="margin-top: 10px"><a class="waves-effect waves-light btn" id="submit">提交</a></div>
+    </div>
+
+</div>
+
+{% endblock %}
+{% block script %}
+<script>
+  $(document).ready(function () {
+    //$('.fixed-action-btn').floatingActionButton();
+    $('.modal').modal();
+    $("#submit").click(function () {
+      var val = $("#date").val();
+      window.location.href = "space/" + val;
+    })
+  });
+</script>
+{% endblock %}

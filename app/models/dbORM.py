@@ -13,6 +13,17 @@ class Color(db.Model):
     cprop1= db.Column(db.String(1000))
     cprop2= db.Column(db.String(1000))
     fontcolor = db.Column(db.String(1000))
+    spaceimg = db.Column(db.String(1000))
+    def __repr__(self):
+        return self.id
+
+class Space(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    img= db.Column(db.String(1000))
+    name= db.Column(db.String(1000))
+    description= db.Column(db.Text())
+    srcimg= db.Column(db.String(1000))
+    srcurl = db.Column(db.String(1000))
     def __repr__(self):
         return self.id
 

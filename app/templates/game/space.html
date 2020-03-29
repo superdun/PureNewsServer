@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block css %}
+
+<title>生日宇宙</title>
+{% endblock %}
+{% block content %}
+<img style="  max-height: 100%;max-width: 100%;  position: absolute;margin: auto;top: 0;left: 0;right: 0;bottom: 0;" src="http://q7xvmvmiv.bkt.clouddn.com/{{ space.img }}">
+<div style="width: 100%;bottom: 15px;position: absolute;text-align: center;">
+    <a href="#modal1" style="color: black;" class="modal-trigger">
+        <p style="color: white">查看介绍</p>
+    </a>
+    <a href="{{ space.srcurl }}" style="color: black;">
+        <p style="color: white">访问原网站</p>
+    </a>
+    <a href="{{ url_for('web.spaceSearch') }}" style="color: black;">
+        <p style="color: white">回首页</p>
+    </a>
+
+</div>
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+        <div style="width: 100%;text-align: left">
+            <h5>{{ space.id|noZeroBefore }}</h5>
+            <h5>{{ space.name }}</h5>
+            <p>{{ space.description }}</p>
+        </div>
+    </div>
+     <div class="modal-footer">
+        <a href="http://q7xvmvmiv.bkt.clouddn.com/{{ space.img }}"  class=" waves-effect waves-green btn-flat">
+        查看原图
+        </a>
+    </div>
+  </div>
+{% endblock %}
+{% block script %}
+<script>
+  $(document).ready(function () {
+        $("body").css("background-color","black");
+        $('.modal').modal();
+  });
+</script>
+{% endblock %}

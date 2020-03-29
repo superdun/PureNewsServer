@@ -2,7 +2,7 @@
 import hashlib
 from flask import current_app, render_template, request, redirect, url_for, Blueprint, abort
 import flask_login
-from ..models.dbORM import Color
+from ..models.dbORM import Color,Space
 from app import db, login_manager
 web = Blueprint('web', __name__)
 
@@ -26,6 +26,18 @@ def birthcolor(id):
     else:
         abort(404)
 
+@web.route('/space')
+def spaceSearch():
+    return render_template("game/spacesearch.html")
+
+
+@web.route('/space/<id>')
+def space(id):
+    space = Space.query.filter_by(id=id).first()
+    if space:
+        return render_template("game/space.html", space=space)
+    else:
+        abort(404)
 
 @web.errorhandler(404)
 def page_not_found(error):
